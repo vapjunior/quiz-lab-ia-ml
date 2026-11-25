@@ -1,6 +1,8 @@
 import MarkdownIt from 'markdown-it'
 import { h } from 'vue'
 import CodeBlock from '../components/CodeBlock.vue'
+import ScientificFigure from '../components/ScientificFigure.vue'
+import { embeddedPngDimensions } from './embedded-png.js'
 
 const markdown = new MarkdownIt({ html: false })
 const allowedTags = new Set([
@@ -43,6 +45,15 @@ function tokenProps(token) {
   return null
 }
 
+function renderImage(token) {
+  const src = token.attrGet('src')
+  const alt = markdown.renderer.renderInlineAsText(token.children, markdown.options, {})
+  const dimensions = embeddedPngDimensions(src)
+  if (!dimensions) return alt
+
+  return h('img', { class: 'embedded-png', src, alt, ...dimensions })
+}
+
 export function renderMarkdown(tokens, filename, copyable) {
   const root = { children: [] }
   const stack = [root]
@@ -60,6 +71,13 @@ export function renderMarkdown(tokens, filename, copyable) {
       const parent = stack.at(-1).children
       if (frame.token.hidden || !allowedTags.has(frame.token.tag)) {
         parent.push(...frame.children)
+      } else if (
+        frame.token.tag === 'p' &&
+        frame.children.length === 1 &&
+        frame.children[0]?.type === 'img'
+      ) {
+        const { src, alt, width, height } = frame.children[0].props
+        parent.push(h(ScientificFigure, { src, alt, width, height }))
       } else {
         parent.push(h(frame.token.tag, tokenProps(frame.token), frame.children))
       }
@@ -94,6 +112,8 @@ export function renderMarkdown(tokens, filename, copyable) {
         children.push(h('hr'))
         break
       case 'image':
+        children.push(renderImage(token))
+        break
       case 'text':
         children.push(token.content)
         break

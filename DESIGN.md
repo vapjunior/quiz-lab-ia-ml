@@ -26,4 +26,8 @@ A pilha sans de sistema evita downloads de fontes e mantém a leitura confortáv
 
 ## Interação e adaptação
 
-Controles principais têm pelo menos 44 px e contorno de foco visível. Os radios têm controle nativo com conteúdo rico ao lado. A resposta correta e a errada recebem texto e ícone. A rolagem horizontal acontece no trecho de código e os botões permanecem no fluxo da página. A abertura muda de duas colunas para uma, os trechos das alternativas passam para baixo dos controles em telas estreitas, e os controles de avanço ocupam a largura disponível em telas estreitas. O movimento breve de entrada e as transições de estado respeitam a preferência de movimento reduzido.
+Controles principais têm pelo menos 44 px e contorno de foco visível. Os radios têm controle nativo com conteúdo rico ao lado. A resposta correta e a errada recebem texto e ícone. A rolagem horizontal acontece no trecho de código e os botões permanecem no fluxo da página. Os trechos das alternativas passam para baixo dos controles em telas estreitas, e os controles de avanço ocupam a largura disponível em telas estreitas. O movimento breve de entrada e as transições de estado respeitam a preferência de movimento reduzido.
+
+## Figuras científicas
+
+As figuras preservam proporção, unidades, escalas e cores da fonte. A visão inicial mantém o gráfico inteiro na largura do enunciado, e a ação de ampliação permite ler os rótulos com rolagem contida no visualizador. O controle de ampliação funciona por teclado, o diálogo fecha por botão ou `Esc` e o foco retorna ao controle que o abriu.

@@ -62,6 +62,57 @@ describe('conteúdo Markdown de revisão', () => {
   })
 })
 
+describe('figuras do questionário', () => {
+  const prefix = 'data:image/png;base64,'
+  const png =
+    'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+XnXkAAAAASUVORK5CYII='
+
+  it('preserva a imagem e o texto alternativo em uma figura semântica', () => {
+    const source = `${prefix}${png}`
+    const wrapper = render(`Antes.\n\n![Valores de RMSE](${source})\n\nDepois.`)
+    expect(Array.from(wrapper.element.children, (child) => child.tagName)).toEqual([
+      'P',
+      'FIGURE',
+      'P',
+    ])
+    expect(wrapper.get('figure img').attributes()).toMatchObject({
+      src: source,
+      alt: 'Valores de RMSE',
+      width: '1',
+      height: '1',
+    })
+    expect(wrapper.get('figure button').text()).toBe('Ampliar gráfico')
+    wrapper.unmount()
+  })
+
+  it('mantém imagens inseridas numa frase dentro do parágrafo', () => {
+    const wrapper = render(`Antes ![Ponto](${prefix}${png}) depois.`)
+    expect(wrapper.get('p img').attributes('alt')).toBe('Ponto')
+    expect(wrapper.find('figure').exists()).toBe(false)
+  })
+
+  it('preserva a descrição quando a imagem não pode ser decodificada', async () => {
+    const wrapper = render(`![Valores de RMSE](${prefix}${png})`)
+    await wrapper.get('figure img').trigger('error')
+    expect(wrapper.find('figure img').exists()).toBe(false)
+    expect(wrapper.get('figure').text()).toContain('Valores de RMSE')
+    expect(wrapper.find('figure button').exists()).toBe(false)
+    wrapper.unmount()
+  })
+
+  it('recusa um cabeçalho inválido ou dimensões fora do limite', () => {
+    const bytes = atob(png)
+    const widePng = btoa(bytes.slice(0, 17) + String.fromCharCode(64) + bytes.slice(18))
+    const fakePng = 'A' + png.slice(1)
+    const wrapper = render(
+      `![Cabeçalho inválido](${prefix}${fakePng})\n\n![Imagem grande](${prefix}${widePng})`,
+    )
+    expect(wrapper.find('img, dialog').exists()).toBe(false)
+    expect(wrapper.text()).toContain('Cabeçalho inválido')
+    expect(wrapper.text()).toContain('Imagem grande')
+  })
+})
+
 describe('cópia do código', () => {
   function mockClipboard(writeText) {
     vi.stubGlobal('navigator', { clipboard: { writeText } })

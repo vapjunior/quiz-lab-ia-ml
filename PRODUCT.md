@@ -20,4 +20,4 @@ O estudante confirma uma alternativa por questão. O feedback identifica acerto 
 
 ## Conteúdo e acessibilidade
 
-O conteúdo será fornecido pelo usuário em JSON. A base atual aguarda o material da turma. O app usa interface em português brasileiro, controles nativos, foco visível, navegação por teclado e blocos de código próprios para leitura e cópia.
+O JSON da turma contém 40 questões. Os enunciados combinam texto, código Python e três gráficos originais. O app usa interface em português brasileiro, controles nativos, foco visível, navegação por teclado e blocos de código próprios para leitura e cópia. As figuras têm descrição textual e ampliação para leitura dos eixos e das legendas.

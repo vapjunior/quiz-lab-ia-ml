@@ -47,6 +47,11 @@ const Content = () => renderMarkdown(tokens.value, props.filename, props.copyabl
   font-variant-ligatures: none;
 }
 
+.markdown-content :deep(.embedded-png) {
+  max-inline-size: 100%;
+  block-size: auto;
+}
+
 .markdown-content :deep(table) {
   display: block;
   max-inline-size: 100%;

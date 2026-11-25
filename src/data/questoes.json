@@ -1,4 +1,885 @@
 {
-  "titulo": "Aprendizagem de Máquina",
-  "questoes": []
+  "titulo": "Revisão de Aprendizagem de máquina",
+  "questoes": [
+    {
+      "id": "q01",
+      "enunciado": "Em uma regressão linear simples que estima o preço de venda com base na área do imóvel, complete a frase. O coeficiente angular indica a ______ para cada unidade adicional de área.",
+      "alternativaCorretaId": "alt01",
+      "alternativas": [
+        {
+          "id": "alt01",
+          "texto": "Variação estimada no preço médio",
+          "justificativa": "A inclinação fornece a diferença no preço estimado para um acréscimo de uma unidade na área."
+        },
+        {
+          "id": "alt02",
+          "texto": "Área média entre os imóveis com o mesmo preço",
+          "justificativa": "A regressão descrita estima o preço a partir da área. A alternativa inverte os papéis do preditor e do alvo."
+        },
+        {
+          "id": "alt03",
+          "texto": "Distância média dos preços observados à reta ajustada",
+          "justificativa": "Essa distância é resumida por métricas de resíduos, como o MAE. A inclinação descreve a reta."
+        }
+      ]
+    },
+    {
+      "id": "q02",
+      "enunciado": "Um imóvel de King County foi vendido por US$ 410 mil. O modelo estimou US$ 450 mil. Considerando resíduo = observado − previsto, qual é a interpretação?",
+      "alternativaCorretaId": "alt01",
+      "alternativas": [
+        {
+          "id": "alt01",
+          "texto": "O resíduo é −US$ 40 mil e o modelo superestimou o preço.",
+          "justificativa": "Subtrair 450 mil de 410 mil resulta em −40 mil. A previsão ficou acima do preço observado."
+        },
+        {
+          "id": "alt02",
+          "texto": "O resíduo é +US$ 40 mil e o modelo superestimou o preço.",
+          "justificativa": "A superestimação produz resíduo negativo na convenção adotada."
+        },
+        {
+          "id": "alt03",
+          "texto": "O resíduo é −US$ 40 mil e o modelo subestimou o preço.",
+          "justificativa": "O sinal está correto. Prever 450 mil para um preço observado de 410 mil é uma superestimação."
+        }
+      ]
+    },
+    {
+      "id": "q03",
+      "enunciado": "Em uma regressão linear múltipla do preço de imóveis, sem interações, o coeficiente de uma vaga extra de garagem é +US$ 12 mil. Qual interpretação é adequada?",
+      "alternativaCorretaId": "alt02",
+      "alternativas": [
+        {
+          "id": "alt01",
+          "texto": "O preço médio dos imóveis com garagem é US$ 12 mil.",
+          "justificativa": "O coeficiente expressa uma diferença na saída prevista a cada unidade do preditor."
+        },
+        {
+          "id": "alt02",
+          "texto": "A previsão aumenta em US$ 12 mil por vaga extra, mantendo os demais preditores fixos.",
+          "justificativa": "Na regressão linear múltipla sem interações envolvendo essa variável, essa é a variação estimada ao acrescentar uma unidade ao preditor."
+        },
+        {
+          "id": "alt03",
+          "texto": "Construir uma vaga causa um aumento de US$ 12 mil em qualquer imóvel.",
+          "justificativa": "O coeficiente descreve uma associação condicional estimada. Uma alegação causal exige um desenho que sustente essa inferência."
+        }
+      ]
+    },
+    {
+      "id": "q04",
+      "enunciado": "Qual trecho cria os termos x e x², sem uma coluna constante duplicando o intercepto do estimador, para uma entrada X com um único preditor? Considere as classes importadas e X bidimensional.",
+      "alternativaCorretaId": "alt03",
+      "alternativas": [
+        {
+          "id": "alt01",
+          "texto": "`make_pipeline(PolynomialFeatures(degree=2, include_bias=True), LinearRegression())`",
+          "justificativa": "A transformação inclui uma coluna de uns, enquanto o regressor também ajusta um intercepto por padrão."
+        },
+        {
+          "id": "alt02",
+          "texto": "`make_pipeline(PolynomialFeatures(degree=1, include_bias=False), LinearRegression())`",
+          "justificativa": "O grau 1 mantém apenas o termo x para uma entrada univariada."
+        },
+        {
+          "id": "alt03",
+          "texto": "`make_pipeline(PolynomialFeatures(degree=2, include_bias=False), LinearRegression())`",
+          "justificativa": "A expansão cria x e x². O intercepto fica a cargo de `LinearRegression()`."
+        }
+      ]
+    },
+    {
+      "id": "q05",
+      "enunciado": "Uma regressão recebe uma coluna em metros e outra que contém exatamente os mesmos comprimentos em centímetros. Complete. Nesse caso, a matriz XᵀX é ______ e ______ é uma alternativa para obter uma solução de mínimos quadrados.",
+      "alternativaCorretaId": "alt03",
+      "alternativas": [
+        {
+          "id": "alt01",
+          "texto": "Invertível / a inversa ordinária de XᵀX",
+          "justificativa": "Colunas exatamente proporcionais tornam XᵀX singular. A inversa ordinária fica indefinida."
+        },
+        {
+          "id": "alt02",
+          "texto": "Singular / aumentar o grau da expansão polinomial",
+          "justificativa": "Acrescentar termos preserva as duas colunas proporcionais se ambas continuarem na expansão. A singularidade permanece."
+        },
+        {
+          "id": "alt03",
+          "texto": "Singular / a pseudoinversa de X",
+          "justificativa": "A dependência linear impede a inversão de XᵀX. A pseudoinversa de X fornece uma solução de mínimos quadrados de norma mínima."
+        }
+      ]
+    },
+    {
+      "id": "q06",
+      "enunciado": "O gráfico mostra resíduos em função dos preços previstos, em milhares de dólares. A dispersão vertical é menor à esquerda e se amplia à direita, com valores positivos e negativos ao redor de zero. Qual é o diagnóstico mais diretamente sugerido?\n\n![Dispersão de resíduos versus preço previsto, com referência horizontal em zero](data:image/png;base64,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)",
+      "alternativaCorretaId": "alt02",
+      "alternativas": [
+        {
+          "id": "alt01",
+          "texto": "Um viés de superestimação constante em toda a faixa.",
+          "justificativa": "Um viés de superestimação constante apareceria como resíduos sistematicamente negativos."
+        },
+        {
+          "id": "alt02",
+          "texto": "Heterocedasticidade, com maior variabilidade dos resíduos nos preços previstos mais altos.",
+          "justificativa": "O formato de funil indica uma possível variação da dispersão condicional ao longo da faixa de previsões."
+        },
+        {
+          "id": "alt03",
+          "texto": "Uma relação quadrática omitida, evidenciada pela curvatura da média dos resíduos.",
+          "justificativa": "A assinatura descrita é o alargamento da dispersão. A média dos resíduos não apresenta uma curvatura sistemática no gráfico."
+        }
+      ]
+    },
+    {
+      "id": "q07",
+      "enunciado": "Associe as penalizações aos modelos. I. Ridge. II. Lasso. III. Elastic Net. A. L1. B. L1 e L2. C. L2.",
+      "alternativaCorretaId": "alt03",
+      "alternativas": [
+        {
+          "id": "alt01",
+          "texto": "I–A, II–C, III–B.",
+          "justificativa": "A combinação de Elastic Net está correta. Ridge é L2 e Lasso é L1."
+        },
+        {
+          "id": "alt02",
+          "texto": "I–B, II–A, III–C.",
+          "justificativa": "A associação de Lasso está correta. A penalização combinada é de Elastic Net e a L2 é de Ridge."
+        },
+        {
+          "id": "alt03",
+          "texto": "I–C, II–A, III–B.",
+          "justificativa": "Ridge penaliza a soma dos quadrados dos coeficientes, Lasso penaliza a soma dos valores absolutos e Elastic Net combina as duas penalizações."
+        }
+      ]
+    },
+    {
+      "id": "q08",
+      "enunciado": "Avalie as afirmações sobre regressão polinomial. I. Um modelo com x e x² pode continuar linear nos coeficientes. II. Com mínimos quadrados e as mesmas observações, acrescentar x² ao modelo com intercepto e x sempre aumenta a soma dos erros quadráticos de treino. III. Reduzir o erro de treino garante reduzir o erro em dados novos.",
+      "alternativaCorretaId": "alt01",
+      "alternativas": [
+        {
+          "id": "alt01",
+          "texto": "V, F, F.",
+          "justificativa": "O modelo é linear nos coeficientes. Ao incluir x², o ajuste anterior continua disponível com coeficiente quadrático zero. O desempenho fora da amostra pode piorar."
+        },
+        {
+          "id": "alt02",
+          "texto": "F, F, V.",
+          "justificativa": "A I é verdadeira pela forma aditiva dos coeficientes e a III é falsa porque o ganho no treino pode refletir sobreajuste."
+        },
+        {
+          "id": "alt03",
+          "texto": "V, V, F.",
+          "justificativa": "A II é falsa. O novo modelo pode reproduzir o ajuste anterior ao atribuir coeficiente zero a x²."
+        }
+      ]
+    },
+    {
+      "id": "q09",
+      "enunciado": "No laboratório de King County, dois modelos avaliados nos mesmos imóveis retornam MAE de US$ 48 mil e US$ 56 mil. Qual conclusão é sustentada diretamente pela métrica?",
+      "alternativaCorretaId": "alt03",
+      "alternativas": [
+        {
+          "id": "alt01",
+          "texto": "O segundo apresentou menor erro nos imóveis mais caros.",
+          "justificativa": "Para concluir isso, seria preciso calcular a métrica especificamente nessa faixa de preços."
+        },
+        {
+          "id": "alt02",
+          "texto": "O primeiro errou exatamente US$ 48 mil em cada previsão.",
+          "justificativa": "O MAE é uma média. Os erros individuais podem ser maiores ou menores que esse valor."
+        },
+        {
+          "id": "alt03",
+          "texto": "O primeiro apresentou menor erro absoluto médio no conjunto avaliado.",
+          "justificativa": "O MAE calcula a média das magnitudes dos erros. Entre os dois valores, US$ 48 mil é o menor."
+        }
+      ]
+    },
+    {
+      "id": "q10",
+      "enunciado": "Dois modelos apresentam erros absolutos de [4, 4] e [0, 8] em duas observações. Selecione a afirmação correta.",
+      "alternativaCorretaId": "alt02",
+      "alternativas": [
+        {
+          "id": "alt01",
+          "texto": "O segundo tem RMSE menor porque acertou uma das observações.",
+          "justificativa": "O erro zero reduz uma contribuição, mas o erro de magnitude 8 eleva a média quadrática acima da do primeiro modelo."
+        },
+        {
+          "id": "alt02",
+          "texto": "Os MAEs empatam, e o RMSE é maior no segundo modelo.",
+          "justificativa": "Ambos têm MAE 4. O RMSE é 4 no primeiro e √32, aproximadamente 5,66, no segundo."
+        },
+        {
+          "id": "alt03",
+          "texto": "O primeiro tem MAE menor, e os RMSEs empatam.",
+          "justificativa": "Os dois MAEs são 4, e elevar os resíduos ao quadrado dá maior peso ao erro de magnitude 8."
+        }
+      ]
+    },
+    {
+      "id": "q11",
+      "enunciado": "Um modelo tem R² de −0,15 em um teste cujo alvo apresenta variabilidade. Como interpretar?",
+      "alternativaCorretaId": "alt01",
+      "alternativas": [
+        {
+          "id": "alt01",
+          "texto": "A soma dos erros quadráticos supera a obtida ao prever a média dos valores reais do próprio teste.",
+          "justificativa": "No R² usual, o denominador é a soma dos quadrados em relação à média do alvo do conjunto avaliado. Um valor negativo indica que a soma residual ultrapassou esse denominador."
+        },
+        {
+          "id": "alt02",
+          "texto": "Os preditores têm correlação de −0,15 com o alvo.",
+          "justificativa": "O R² compara somas de quadrados. Esse valor não é uma correlação entre alvo e preditores."
+        },
+        {
+          "id": "alt03",
+          "texto": "Em média, as previsões ficaram 15% abaixo dos valores reais.",
+          "justificativa": "O R² não mede erro percentual nem informa a direção dos resíduos."
+        }
+      ]
+    },
+    {
+      "id": "q12",
+      "enunciado": "Considere que `pipe` contém um `StandardScaler` seguido de Ridge. O treino e o teste já estão separados. Qual sequência preserva a estimativa no teste e aplica a mesma padronização aos dois conjuntos?",
+      "alternativaCorretaId": "alt01",
+      "alternativas": [
+        {
+          "id": "alt01",
+          "texto": "`pipe.fit(X_treino, y_treino)` e depois `pipe.predict(X_teste)`.",
+          "justificativa": "O pipeline aprende a escala e os coeficientes no treino e transforma o teste com os mesmos parâmetros."
+        },
+        {
+          "id": "alt02",
+          "texto": "`pipe.fit(X_treino, y_treino)`, seguido de `pipe.predict(StandardScaler().fit_transform(X_teste))`.",
+          "justificativa": "O teste seria escalado separadamente e passaria novamente pelo escalonador do pipeline. A escala usada na previsão ficaria inconsistente."
+        },
+        {
+          "id": "alt03",
+          "texto": "`pipe.fit(X_teste, y_teste)` e depois `pipe.predict(X_treino)`.",
+          "justificativa": "O ajuste usa o conjunto que deveria ficar reservado à avaliação e a previsão passa a ser feita no treino."
+        }
+      ]
+    },
+    {
+      "id": "q13",
+      "enunciado": "A área total construída de um imóvel tem VIF muito alto em um modelo que também usa áreas por pavimento. Qual interpretação é mais adequada?",
+      "alternativaCorretaId": "alt03",
+      "alternativas": [
+        {
+          "id": "alt01",
+          "texto": "A área total apresenta forte relação com o preço, provada pelo VIF.",
+          "justificativa": "O VIF é calculado a partir da relação entre preditores. O alvo do problema fica fora desse cálculo."
+        },
+        {
+          "id": "alt02",
+          "texto": "Remover a área total necessariamente reduz o erro em imóveis novos.",
+          "justificativa": "A remoção pode reduzir redundância. Seu efeito preditivo deve ser avaliado empiricamente em dados separados."
+        },
+        {
+          "id": "alt03",
+          "texto": "A área total é fortemente explicada pelos demais preditores, o que pode inflar a variância de seu coeficiente em mínimos quadrados.",
+          "justificativa": "O VIF usa o R² da regressão auxiliar desse preditor sobre os demais. Um R² auxiliar próximo de 1 produz um VIF elevado."
+        }
+      ]
+    },
+    {
+      "id": "q14",
+      "enunciado": "Uma equipe quer combinar encolhimento de coeficientes e possibilidade de zerar alguns deles, usando uma penalização que contenha simultaneamente L1 e L2. Qual configuração atende ao objetivo?",
+      "alternativaCorretaId": "alt02",
+      "alternativas": [
+        {
+          "id": "alt01",
+          "texto": "`Lasso(alpha=1.0)`",
+          "justificativa": "Lasso aplica somente L1. Ele pode zerar certos coeficientes, mas a penalização pedida também inclui L2."
+        },
+        {
+          "id": "alt02",
+          "texto": "`ElasticNet(alpha=1.0, l1_ratio=0.5)`",
+          "justificativa": "Com penalização positiva e `l1_ratio` entre zero e um, as componentes L1 e L2 participam da função objetivo."
+        },
+        {
+          "id": "alt03",
+          "texto": "`Ridge(alpha=1.0)`",
+          "justificativa": "Ridge aplica somente L2, que encolhe coeficientes sem promover esparsidade como L1."
+        }
+      ]
+    },
+    {
+      "id": "q15",
+      "enunciado": "Uma equipe quer estimar o preço de imóveis que nunca apareceram no treino. Alguns imóveis foram vendidos mais de uma vez e ocupam várias linhas da base. Qual procedimento atende ao objetivo?",
+      "alternativaCorretaId": "alt02",
+      "alternativas": [
+        {
+          "id": "alt01",
+          "texto": "Sortear as vendas individualmente e manter a faixa de preços equilibrada entre as partes.",
+          "justificativa": "Equilibrar faixas de preço pode ser útil. Separar vendas da mesma propriedade permite que informações do mesmo imóvel apareçam nos dois conjuntos."
+        },
+        {
+          "id": "alt02",
+          "texto": "Fazer o holdout e os folds de validação por identificador de imóvel.",
+          "justificativa": "A separação por grupo mantém todas as vendas de um imóvel no mesmo lado de cada divisão."
+        },
+        {
+          "id": "alt03",
+          "texto": "Agrupar as vendas pelo mês e usar o mês como único critério.",
+          "justificativa": "Agrupar por mês preserva blocos do calendário, mas vendas de um mesmo imóvel podem ocorrer em meses diferentes."
+        }
+      ]
+    },
+    {
+      "id": "q16",
+      "enunciado": "Associe as etapas a suas funções principais. I. Treino. II. Validação. III. Teste final. A. Estimar o desempenho da escolha congelada. B. Ajustar coeficientes. C. Comparar hiperparâmetros.",
+      "alternativaCorretaId": "alt03",
+      "alternativas": [
+        {
+          "id": "alt01",
+          "texto": "I–B, II–A, III–C.",
+          "justificativa": "O papel do treino está correto. A validação orienta a escolha, e o teste estima o resultado da escolha."
+        },
+        {
+          "id": "alt02",
+          "texto": "I–C, II–A, III–B.",
+          "justificativa": "Os coeficientes são ajustados no treino. Escolher e avaliar a configuração são papéis de validação e teste, respectivamente."
+        },
+        {
+          "id": "alt03",
+          "texto": "I–B, II–C, III–A.",
+          "justificativa": "O treino ajusta parâmetros do modelo, a validação orienta decisões e o teste final mede o desempenho após essas decisões."
+        }
+      ]
+    },
+    {
+      "id": "q17",
+      "enunciado": "Um conjunto de desenvolvimento com 100 observações independentes é avaliado com K-fold de cinco partes iguais. Para uma configuração fixa, como as observações participam da validação?",
+      "alternativaCorretaId": "alt01",
+      "alternativas": [
+        {
+          "id": "alt01",
+          "texto": "Cada observação valida uma vez e participa do treino em quatro rodadas.",
+          "justificativa": "Cada fold de 20 observações é reservado uma vez, enquanto as outras 80 treinam naquele ciclo."
+        },
+        {
+          "id": "alt02",
+          "texto": "As mesmas 20 observações validam em todas as rodadas.",
+          "justificativa": "No K-fold, a parte reservada muda a cada rodada. Manter as mesmas 20 seria uma divisão fixa."
+        },
+        {
+          "id": "alt03",
+          "texto": "Cada observação valida em quatro rodadas e participa do treino em uma.",
+          "justificativa": "O conjunto de validação é um fold por rodada. Os quatro restantes formam o treino."
+        }
+      ]
+    },
+    {
+      "id": "q18",
+      "enunciado": "Considere os imports realizados e as variáveis de treino disponíveis. Qual código evita que as estatísticas da padronização sejam aprendidas com as observações do fold de validação?",
+      "alternativaCorretaId": "alt03",
+      "alternativas": [
+        {
+          "id": "alt01",
+          "texto": "```python\nX_pad = StandardScaler().fit_transform(X_treino)\nscores = cross_val_score(Ridge(), X_pad, y_treino, cv=5)\n```",
+          "justificativa": "O escalonador aprendeu a média e o desvio padrão sobre todo o conjunto de desenvolvimento antes da formação dos folds."
+        },
+        {
+          "id": "alt02",
+          "texto": "```python\nescala = StandardScaler().fit(X_treino)\nscores = cross_val_score(Ridge(), escala.transform(X_treino), y_treino, cv=5)\n```",
+          "justificativa": "Separar a chamada a `fit()` da chamada a `transform()` mantém o mesmo problema quando o ajuste ocorre sobre todo o conjunto antes da divisão."
+        },
+        {
+          "id": "alt03",
+          "texto": "```python\npipe = make_pipeline(StandardScaler(), Ridge())\nscores = cross_val_score(pipe, X_treino, y_treino, cv=5)\n```",
+          "justificativa": "A validação ajusta uma cópia do pipeline em cada parte de treino. A parte de validação recebe a transformação já ajustada naquele fold."
+        }
+      ]
+    },
+    {
+      "id": "q19",
+      "enunciado": "O passo de regressão de um `Pipeline` foi nomeado `reg` e contém um Ridge. Qual configuração avalia os valores da lista `[0.1, 1, 10]` para a intensidade de regularização em `GridSearchCV`?",
+      "alternativaCorretaId": "alt02",
+      "alternativas": [
+        {
+          "id": "alt01",
+          "texto": "`param_grid={\"ridge__alpha\": [0.1, 1, 10]}`",
+          "justificativa": "O prefixo precisa corresponder ao nome da etapa no pipeline. Nesse caso, o nome informado é `reg`."
+        },
+        {
+          "id": "alt02",
+          "texto": "`param_grid={\"reg__alpha\": [0.1, 1, 10]}`",
+          "justificativa": "A notação `etapa__parâmetro` direciona a busca ao hiperparâmetro `alpha` da etapa `reg`."
+        },
+        {
+          "id": "alt03",
+          "texto": "`param_grid={\"alpha\": [0.1, 1, 10]}`",
+          "justificativa": "Essa chave se aplica se o Ridge for o próprio estimador passado à busca. No pipeline, é preciso identificar a etapa."
+        }
+      ]
+    },
+    {
+      "id": "q20",
+      "enunciado": "Uma busca usa `scoring=\"neg_mean_absolute_error\"`. A configuração A obteve −42 e a B obteve −51 na coluna `mean_test_score` da validação cruzada. Qual leitura está correta?",
+      "alternativaCorretaId": "alt03",
+      "alternativas": [
+        {
+          "id": "alt01",
+          "texto": "As duas ficaram empatadas porque os scores são negativos.",
+          "justificativa": "O sinal vem da convenção de avaliação. Os scores continuam ordenáveis e representam erros médios diferentes."
+        },
+        {
+          "id": "alt02",
+          "texto": "B é preferida, com MAE médio de 51.",
+          "justificativa": "O maior erro absoluto médio implica um score mais negativo. Nesse critério, B fica atrás."
+        },
+        {
+          "id": "alt03",
+          "texto": "A é preferida, com MAE médio de 42.",
+          "justificativa": "O scikit-learn maximiza o score. O MAE original de A é 42, inferior ao 51 de B."
+        }
+      ]
+    },
+    {
+      "id": "q21",
+      "enunciado": "Qual alternativa contém a afirmação incorreta sobre métodos de busca de hiperparâmetros?",
+      "alternativaCorretaId": "alt01",
+      "alternativas": [
+        {
+          "id": "alt01",
+          "texto": "A busca aleatória distribui novas tentativas com base no desempenho das configurações anteriores.",
+          "justificativa": "A busca aleatória padrão amostra configurações de espaços definidos previamente. Usar avaliações anteriores para orientar as próximas consultas é típico da otimização bayesiana."
+        },
+        {
+          "id": "alt02",
+          "texto": "Uma busca bayesiana pode usar resultados anteriores para decidir quais configurações experimentar em seguida.",
+          "justificativa": "A afirmação é correta. Os resultados já observados informam a escolha de novas avaliações."
+        },
+        {
+          "id": "alt03",
+          "texto": "A busca em grade testa todas as combinações especificadas na própria grade.",
+          "justificativa": "A afirmação é correta. Uma grade de três valores de um parâmetro e quatro de outro define doze combinações."
+        }
+      ]
+    },
+    {
+      "id": "q22",
+      "enunciado": "Três pontos da curva mostram o RMSE médio de treino e validação para graus 1, 3 e 8 de uma regressão polinomial. Os pares treino/validação são 25/27, 14/16 e 5/29. Qual grau você escolheria exclusivamente pelo menor RMSE médio de validação?\n\n![Curvas de RMSE médio de treino e de validação para os graus 1, 3 e 8](data:image/png;base64,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)",
+      "alternativaCorretaId": "alt01",
+      "alternativas": [
+        {
+          "id": "alt01",
+          "texto": "Grau 3, porque atinge RMSE de validação de 16.",
+          "justificativa": "O grau 3 minimiza a métrica que orienta a seleção entre as configurações avaliadas."
+        },
+        {
+          "id": "alt02",
+          "texto": "Grau 8, porque o treino atingiu o menor RMSE.",
+          "justificativa": "O treino teve RMSE 5, mas o erro em validação subiu para 29, sinal compatível com sobreajuste."
+        },
+        {
+          "id": "alt03",
+          "texto": "Grau 1, porque a proximidade entre as curvas basta para indicar melhor desempenho.",
+          "justificativa": "A diferença é pequena, mas o erro de validação é 27. Um intervalo pequeno entre treino e validação também pode ocorrer com erros altos."
+        }
+      ]
+    },
+    {
+      "id": "q23",
+      "enunciado": "Em uma curva de aprendizado, o MAE de validação diminui conforme adicionamos exemplos ao treino. No maior tamanho medido, ele ainda está caindo e permanece bem acima do MAE de treino. Qual hipótese faz sentido investigar?",
+      "alternativaCorretaId": "alt03",
+      "alternativas": [
+        {
+          "id": "alt01",
+          "texto": "Trocar a métrica por R² fará o modelo generalizar melhor.",
+          "justificativa": "Uma nova métrica muda a forma de avaliar. A troca isolada deixa os parâmetros do modelo iguais."
+        },
+        {
+          "id": "alt02",
+          "texto": "As curvas mostram que acumular dados já deixou de produzir qualquer ganho em validação.",
+          "justificativa": "O enunciado informa que a curva de validação ainda cai no maior tamanho observado."
+        },
+        {
+          "id": "alt03",
+          "texto": "Mais dados representativos podem reduzir o erro fora da amostra.",
+          "justificativa": "A tendência de queda e a distância entre as curvas sugerem potencial de ganho com mais exemplos. É uma hipótese a testar."
+        }
+      ]
+    },
+    {
+      "id": "q24",
+      "enunciado": "Dois modelos foram avaliados nos mesmos três folds. Os MAEs de A foram [9, 19, 29] e os de B foram [10, 20, 30], na mesma ordem. Qual conclusão está sustentada por essa comparação?",
+      "alternativaCorretaId": "alt01",
+      "alternativas": [
+        {
+          "id": "alt01",
+          "texto": "A teve MAE exatamente 1 unidade menor em cada fold, sem que isso por si só demonstre significância.",
+          "justificativa": "As diferenças pareadas são [−1, −1, −1]. Elas descrevem os folds avaliados."
+        },
+        {
+          "id": "alt02",
+          "texto": "B é mais estável, pois seus erros estão mais próximos da própria média.",
+          "justificativa": "As duas séries têm a mesma dispersão, pois B é A deslocada em uma unidade em todos os folds."
+        },
+        {
+          "id": "alt03",
+          "texto": "A diferença é estatisticamente significativa porque A obteve menor MAE nos três folds.",
+          "justificativa": "A vantagem consistente na amostra de folds é observável. A significância exige um procedimento adequado, inclusive porque os treinos dos folds se sobrepõem."
+        }
+      ]
+    },
+    {
+      "id": "q25",
+      "enunciado": "Em validação cruzada aninhada, o loop interno é usado para ______ e o loop externo é usado para ______.",
+      "alternativaCorretaId": "alt02",
+      "alternativas": [
+        {
+          "id": "alt01",
+          "texto": "Ajustar o escalonador uma única vez / testar todas as combinações da grade.",
+          "justificativa": "A transformação deve ser reaprendida dentro dos treinos correspondentes. A busca ocorre internamente."
+        },
+        {
+          "id": "alt02",
+          "texto": "Escolher hiperparâmetros / estimar o desempenho do procedimento de seleção e ajuste.",
+          "justificativa": "Cada rodada externa avalia, em dados reservados naquele fold, a configuração escolhida usando apenas os dados disponíveis para treino dessa rodada."
+        },
+        {
+          "id": "alt03",
+          "texto": "Estimar o desempenho final / escolher hiperparâmetros pela média externa.",
+          "justificativa": "Esse arranjo usaria o resultado externo para orientar a seleção que ele deveria avaliar."
+        }
+      ]
+    },
+    {
+      "id": "q26",
+      "enunciado": "Um modelo de previsão do tempo de entrega é usado na confirmação do pedido. Qual atributo cria vazamento por disponibilidade temporal se entrar como preditor?",
+      "alternativaCorretaId": "alt03",
+      "alternativas": [
+        {
+          "id": "alt01",
+          "texto": "Modalidade de frete selecionada antes da confirmação.",
+          "justificativa": "A modalidade já foi escolhida no instante em que a previsão será emitida."
+        },
+        {
+          "id": "alt02",
+          "texto": "Distância calculada a partir dos endereços conhecidos na confirmação.",
+          "justificativa": "Os dados necessários já estão disponíveis na origem e permitem calcular esse preditor."
+        },
+        {
+          "id": "alt03",
+          "texto": "Horário real da entrega ao cliente.",
+          "justificativa": "O horário real só existe depois da entrega. Usá-lo na confirmação daria ao modelo acesso a informação futura."
+        }
+      ]
+    },
+    {
+      "id": "q27",
+      "enunciado": "Após avaliar um modelo no conjunto de teste, a equipe viu o MAE e voltou a ajustar hiperparâmetros para reduzi-lo no mesmo teste. Avalie. I. O teste passou a influenciar a seleção. II. Para voltar a ter uma avaliação final independente, pode-se reservar novos dados representativos que ainda não tenham orientado a escolha.",
+      "alternativaCorretaId": "alt02",
+      "alternativas": [
+        {
+          "id": "alt01",
+          "texto": "Apenas II é verdadeira.",
+          "justificativa": "A I também é verdadeira. As decisões foram tomadas à luz do MAE do teste."
+        },
+        {
+          "id": "alt02",
+          "texto": "I e II são verdadeiras.",
+          "justificativa": "O teste foi incorporado ao processo de decisão. Um novo conjunto reservado permite avaliar a configuração após congelar o procedimento."
+        },
+        {
+          "id": "alt03",
+          "texto": "Apenas I é verdadeira.",
+          "justificativa": "A II também é verdadeira. Dados representativos inéditos restabelecem a separação entre seleção e avaliação."
+        }
+      ]
+    },
+    {
+      "id": "q28",
+      "enunciado": "O gráfico mostra vendas diárias de uma loja ao longo de 28 dias, com picos nos dias 7, 14, 21 e 28. O nível médio sobe, mas a amplitude entre pico e vale se mantém semelhante. Qual descrição combina com esse padrão?\n\n![Série de vendas diárias ao longo de 28 dias](data:image/png;base64,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)",
+      "alternativaCorretaId": "alt03",
+      "alternativas": [
+        {
+          "id": "alt01",
+          "texto": "Ciclo irregular em torno de um nível constante.",
+          "justificativa": "Os picos seguem um período fixo, e a série cresce ao longo do intervalo observado."
+        },
+        {
+          "id": "alt02",
+          "texto": "Tendência crescente com sazonalidade semanal multiplicativa.",
+          "justificativa": "O intervalo semanal foi identificado. Na forma multiplicativa, espera-se que a amplitude absoluta cresça aproximadamente na proporção do nível."
+        },
+        {
+          "id": "alt03",
+          "texto": "Tendência crescente com sazonalidade semanal aproximadamente aditiva.",
+          "justificativa": "Os picos são separados por sete dias e a oscilação se mantém aproximadamente constante em unidades de venda, apesar da elevação do nível."
+        }
+      ]
+    },
+    {
+      "id": "q29",
+      "enunciado": "Uma cantina quer prever o próximo sábado. As vendas observadas foram 42 no sábado anterior e 18 na sexta mais recente. Qual resultado o baseline ingênuo sazonal de período 7 fornece?",
+      "alternativaCorretaId": "alt01",
+      "alternativas": [
+        {
+          "id": "alt01",
+          "texto": "42 vendas, repetindo o último sábado observado.",
+          "justificativa": "O ingênuo sazonal copia o valor conhecido da fase correspondente do ciclo semanal."
+        },
+        {
+          "id": "alt02",
+          "texto": "18 vendas, repetindo a observação mais recente.",
+          "justificativa": "Repetir a última observação corresponde ao baseline ingênuo simples."
+        },
+        {
+          "id": "alt03",
+          "texto": "30 vendas, fazendo a média entre sexta e sábado.",
+          "justificativa": "A média é uma regra distinta. O baseline sazonal usa a observação da mesma posição do ciclo anterior."
+        }
+      ]
+    },
+    {
+      "id": "q30",
+      "enunciado": "O DataFrame `df` está em ordem cronológica e tem uma linha por dia. A equipe criou a coluna abaixo para prever as vendas do dia t antes de ele começar. Qual expressão deve ficar à direita do sinal de atribuição para usar apenas os sete dias encerrados anteriores a t?\n\n```python\ndf[\"media_7\"] = df[\"vendas\"].rolling(7).mean()\n```",
+      "alternativaCorretaId": "alt02",
+      "alternativas": [
+        {
+          "id": "alt01",
+          "texto": "`df[\"vendas\"].rolling(7).mean()`",
+          "justificativa": "A janela termina em t e inclui as vendas que se quer prever."
+        },
+        {
+          "id": "alt02",
+          "texto": "`df[\"vendas\"].shift(1).rolling(7).mean()`",
+          "justificativa": "Deslocar uma linha antes da média faz a janela em t receber os valores de t−7 até t−1."
+        },
+        {
+          "id": "alt03",
+          "texto": "`df[\"vendas\"].shift(-1).rolling(7).mean()`",
+          "justificativa": "O deslocamento negativo antecipa a série e faz a janela incluir vendas posteriores à origem."
+        }
+      ]
+    },
+    {
+      "id": "q31",
+      "enunciado": "Associe os componentes de ARIMA(p, d, q) às definições. I. p. II. d. III. q. A. Ordem dos termos ligados a choques passados. B. Ordem da diferenciação. C. Ordem dos termos ligados a valores passados da série após a diferenciação especificada.",
+      "alternativaCorretaId": "alt02",
+      "alternativas": [
+        {
+          "id": "alt01",
+          "texto": "I–B, II–C, III–A.",
+          "justificativa": "A associação de q está correta. p é a ordem autorregressiva e d especifica a diferenciação."
+        },
+        {
+          "id": "alt02",
+          "texto": "I–C, II–B, III–A.",
+          "justificativa": "p identifica a ordem autorregressiva, d indica quantas diferenças ordinárias são aplicadas e q identifica a ordem do componente de média móvel dos choques."
+        },
+        {
+          "id": "alt03",
+          "texto": "I–A, II–B, III–C.",
+          "justificativa": "A diferenciação está corretamente associada a d. Os papéis dos componentes autorregressivo e de média móvel foram trocados."
+        }
+      ]
+    },
+    {
+      "id": "q32",
+      "enunciado": "Uma loja quer simular previsões de demanda de três meses à frente, emitidas sempre ao fim de março ou junho. Qual esquema de backtesting respeita as origens históricas e o horizonte?",
+      "alternativaCorretaId": "alt01",
+      "alternativas": [
+        {
+          "id": "alt01",
+          "texto": "Ajustar com dados até março para prever abril a junho e com dados até junho para prever julho a setembro.",
+          "justificativa": "Em cada origem, o ajuste usa apenas o histórico então disponível e o horizonte avaliado tem três meses consecutivos."
+        },
+        {
+          "id": "alt02",
+          "texto": "Sortear meses para treinar e validar, mantendo três meses aleatórios como validação em cada rodada.",
+          "justificativa": "O sorteio não reproduz a fronteira temporal nem o horizonte consecutivo usado pela loja."
+        },
+        {
+          "id": "alt03",
+          "texto": "Em março, ajustar com janeiro a junho e prever abril a junho. Em junho, ajustar com janeiro a setembro e prever julho a setembro.",
+          "justificativa": "Cada ajuste inclui o próprio trimestre que seria previsto."
+        }
+      ]
+    },
+    {
+      "id": "q33",
+      "enunciado": "Uma equipe gera de uma só vez as previsões de segunda, terça e quarta usando um modelo recursivo de um passo com lag de um dia. A origem é domingo à noite. O que deve alimentar o lag ao gerar a previsão de terça?",
+      "alternativaCorretaId": "alt03",
+      "alternativas": [
+        {
+          "id": "alt01",
+          "texto": "As vendas reais de domingo em todos os passos.",
+          "justificativa": "Domingo alimenta o primeiro passo. Manter o mesmo valor para terça não reproduz a atualização recursiva do lag."
+        },
+        {
+          "id": "alt02",
+          "texto": "As vendas reais de segunda observadas posteriormente.",
+          "justificativa": "Isso corresponde a atualizar a origem após segunda. A avaliação descrita precisa simular a informação disponível no domingo."
+        },
+        {
+          "id": "alt03",
+          "texto": "A previsão gerada para segunda.",
+          "justificativa": "Na origem de domingo, a venda real de segunda ainda é desconhecida. O procedimento recursivo reaproveita a previsão do passo anterior."
+        }
+      ]
+    },
+    {
+      "id": "q34",
+      "enunciado": "Uma previsão de vendas para o próximo dia é 120 unidades, com intervalo de previsão de 90% entre 95 e 150. Se o procedimento estiver bem calibrado para casos semelhantes, o que os 90% expressam?",
+      "alternativaCorretaId": "alt02",
+      "alternativas": [
+        {
+          "id": "alt01",
+          "texto": "A média histórica das vendas ficará entre 95 e 150 em aproximadamente 90% dos próximos dias.",
+          "justificativa": "O intervalo descreve a incerteza sobre uma observação futura individual. Uma média histórica é outra quantidade."
+        },
+        {
+          "id": "alt02",
+          "texto": "Em muitas previsões comparáveis, aproximadamente 90% dos valores efetivamente observados devem cair dentro dos respectivos intervalos.",
+          "justificativa": "Essa é a interpretação de cobertura de um procedimento bem calibrado para aquele horizonte."
+        },
+        {
+          "id": "alt03",
+          "texto": "Cerca de 90% das vendas futuras serão exatamente 120.",
+          "justificativa": "O valor de 120 é uma previsão pontual. O nível de 90% diz respeito à cobertura do intervalo."
+        }
+      ]
+    },
+    {
+      "id": "q35",
+      "enunciado": "Um catálogo tem títulos e descrições. Para recomendar livros, o sistema representa a descrição de cada livro e o perfil textual do leitor com TF-IDF e ordena os itens pela similaridade cosseno com o perfil. Qual abordagem está descrita?",
+      "alternativaCorretaId": "alt02",
+      "alternativas": [
+        {
+          "id": "alt01",
+          "texto": "Filtragem colaborativa baseada em usuários.",
+          "justificativa": "Essa abordagem buscaria usuários com padrões de interação semelhantes. A pontuação descrita compara características textuais."
+        },
+        {
+          "id": "alt02",
+          "texto": "Recomendação baseada em conteúdo.",
+          "justificativa": "O sistema usa atributos textuais dos itens e a semelhança com os interesses representados no perfil."
+        },
+        {
+          "id": "alt03",
+          "texto": "Popularidade global.",
+          "justificativa": "Popularidade global ordenaria os itens por uma medida agregada, como compras. Aqui a ordem varia conforme a descrição e o perfil."
+        }
+      ]
+    },
+    {
+      "id": "q36",
+      "enunciado": "Um filme foi adicionado ao catálogo e ainda não recebeu visualizações nem avaliações. Há gêneros e sinopse disponíveis, e o usuário já tem histórico. Qual estratégia consegue estimar relevância personalizada desde a entrada do filme?",
+      "alternativaCorretaId": "alt03",
+      "alternativas": [
+        {
+          "id": "alt01",
+          "texto": "Usar exclusivamente similaridade colaborativa item-item calculada por covisualizações do filme novo.",
+          "justificativa": "Sem visualizações do novo item, faltam as covisualizações exigidas para estimar essa similaridade."
+        },
+        {
+          "id": "alt02",
+          "texto": "Ordenar exclusivamente por número total de visualizações de cada filme.",
+          "justificativa": "Essa regra usaria uma contagem global, sem personalização. O filme recém-adicionado também começaria com contagem zero."
+        },
+        {
+          "id": "alt03",
+          "texto": "Comparar os atributos do filme novo com os dos filmes que interessaram ao usuário.",
+          "justificativa": "Os atributos do item e o histórico do usuário permitem uma pontuação de conteúdo mesmo sem interações registradas para o filme."
+        }
+      ]
+    },
+    {
+      "id": "q37",
+      "enunciado": "Em uma matriz usuário × item, uma plataforma registra cliques como feedback implícito. Avalie. I. Um clique é um sinal de interesse possível. II. Ausência de registro comprova rejeição. III. A posição de exibição pode influenciar a probabilidade de clique.",
+      "alternativaCorretaId": "alt02",
+      "alternativas": [
+        {
+          "id": "alt01",
+          "texto": "V, V, F.",
+          "justificativa": "A II é falsa porque pode ter faltado exposição ao item. A III é verdadeira, pois posições mais salientes podem atrair mais cliques."
+        },
+        {
+          "id": "alt02",
+          "texto": "V, F, V.",
+          "justificativa": "O clique é um sinal comportamental que pode ser influenciado pela exposição. Uma célula vazia não revela, sozinha, uma preferência negativa."
+        },
+        {
+          "id": "alt03",
+          "texto": "F, F, V.",
+          "justificativa": "A II e a III foram classificadas corretamente. A I também é verdadeira, já que o clique pode ser usado como sinal de interesse."
+        }
+      ]
+    },
+    {
+      "id": "q38",
+      "enunciado": "Na fatoração de matrizes para recomendação, o que representa o produto escalar entre os vetores latentes de um usuário e de um item?",
+      "alternativaCorretaId": "alt02",
+      "alternativas": [
+        {
+          "id": "alt01",
+          "texto": "O número de outros usuários que interagiram com o item.",
+          "justificativa": "Esse número é uma contagem de popularidade e pode ser calculado diretamente na matriz observada."
+        },
+        {
+          "id": "alt02",
+          "texto": "Uma pontuação de afinidade estimada a partir de padrões de interação.",
+          "justificativa": "Os fatores latentes são aprendidos a partir das interações, e o produto escalar combina as coordenadas do usuário e do item para pontuar aquela combinação."
+        },
+        {
+          "id": "alt03",
+          "texto": "A probabilidade exata de compra, necessariamente entre zero e um.",
+          "justificativa": "O produto escalar pode assumir valores fora desse intervalo. A interpretação probabilística exige uma função de saída e, quando necessário, calibração."
+        }
+      ]
+    },
+    {
+      "id": "q39",
+      "enunciado": "Em um teste offline, há quatro filmes relevantes para um usuário. Entre os cinco filmes recomendados, dois são relevantes. Quais são os valores de Precision@5 e Recall@5?",
+      "alternativaCorretaId": "alt01",
+      "alternativas": [
+        {
+          "id": "alt01",
+          "texto": "Precision@5 = 0,40 e Recall@5 = 0,50.",
+          "justificativa": "A precisão divide os dois acertos pelos cinco recomendados. O recall divide os dois acertos pelos quatro relevantes."
+        },
+        {
+          "id": "alt02",
+          "texto": "Precision@5 = 0,50 e Recall@5 = 0,40.",
+          "justificativa": "Os denominadores foram trocados. Precisão usa o tamanho da lista, e recall usa o total de relevantes."
+        },
+        {
+          "id": "alt03",
+          "texto": "Precision@5 = 0,40 e Recall@5 = 0,40.",
+          "justificativa": "A precisão está correta. Para o recall, o denominador é quatro, portanto o resultado é 0,50."
+        }
+      ]
+    },
+    {
+      "id": "q40",
+      "enunciado": "Uma equipe compara duas listas de tamanho 5 para o mesmo usuário. Há exatamente dois itens relevantes, ambos de mesma relevância binária. A lista A acerta nas posições 1 e 2. A lista B acerta nas posições 4 e 5. Para simular uma recomendação em 30/06, a equipe congelou as interações de treino nessa data e verificou os itens relevantes com interações posteriores. Qual afirmação é correta?",
+      "alternativaCorretaId": "alt01",
+      "alternativas": [
+        {
+          "id": "alt01",
+          "texto": "A tem NDCG@5 maior. O recorte também evita que as interações posteriores usadas na avaliação entrem no treino.",
+          "justificativa": "O NDCG atribui mais peso aos acertos nas primeiras posições. A separação pela data preserva a fronteira de informação do experimento."
+        },
+        {
+          "id": "alt02",
+          "texto": "As duas listas têm o mesmo NDCG@5, pois apresentam os mesmos valores de Precision@5 e Recall@5.",
+          "justificativa": "Precision@5 e Recall@5 empatam. O NDCG distingue as listas pela posição dos acertos."
+        },
+        {
+          "id": "alt03",
+          "texto": "B tem NDCG@5 maior. O recorte cronológico favorece itens que aparecem nas últimas posições.",
+          "justificativa": "O recorte controla quais dados estariam disponíveis na data da recomendação. O desconto do NDCG favorece acertos no início da lista."
+        }
+      ]
+    }
+  ]
 }
