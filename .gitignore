@@ -1,0 +1,12 @@
+node_modules/
+dist/
+coverage/
+playwright-report/
+playwright/.cache/
+test-results/
+screenshots/
+.vite/
+.env
+.env.*
+!.env.example
+.DS_Store
